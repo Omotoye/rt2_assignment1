@@ -56,14 +56,14 @@ int main(int argc, char **argv)
                 if (start == false)
                 {
                     ac.cancelGoal();
-                    ROS_INFO("\nThe Goal has been Cancelled\n");
+                    std::cout << "\nThe Goal has been Cancelled" << std::endl;
                     break;
                 }
                 else
                 {
                     if (ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
                     {
-                        std::cout << "Position reached" << std::endl;
+                        std::cout << "\nGoal Reached!" << std::endl;
                         break;
                     }
                 }

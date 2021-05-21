@@ -10,6 +10,7 @@ project(rt2_assignment1)
 find_package(catkin REQUIRED COMPONENTS
   actionlib 
   actionlib_msgs 
+  nav_msgs
   roscpp
   rospy
   message_generation
@@ -73,6 +74,7 @@ add_action_files(
  generate_messages(
    DEPENDENCIES 
    actionlib_msgs 
+   nav_msgs
  )
 
 ################################################

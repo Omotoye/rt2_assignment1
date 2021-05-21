@@ -4,3 +4,4 @@ float32 theta
 ---
 bool ok
 ---
+nav_msgs/Odometry pose 

@@ -16,6 +16,7 @@ position_ = 0
 state_ = 0
 pub_ = None
 _as = None
+pose = None 
 
 # parameters for control
 yaw_precision_ = math.pi / 9  # +/- 20 degree allowed
@@ -35,7 +36,7 @@ _result = rt2_assignment1.msg.PositionResult()
 def check_preempt():
     # check that preempt has not been requested by the client
     if _as.is_preempt_requested():
-        rospy.loginfo('The Goal has been Preempted')
+        print('The Goal has been Preempted')
         _as.set_preempted()
         done()
         return True
@@ -45,6 +46,11 @@ def check_preempt():
 def clbk_odom(msg):
     global position_
     global yaw_
+    global pose 
+    
+    # position for feedback 
+    pose = msg
+    _feedback.pose = pose 
 
     # position
     position_ = msg.pose.pose.position
@@ -144,8 +150,11 @@ def go_to_point(goal):
     desired_position.x = goal.x
     desired_position.y = goal.y
     des_yaw = goal.theta
+ 
     change_state(0)
     while True:
+        _as.publish_feedback(_feedback)
+        
         if state_ == 0:
             fix_yaw(desired_position)
             if (check_preempt()):
