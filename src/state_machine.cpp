@@ -50,17 +50,24 @@ int main(int argc, char **argv)
             ac.waitForServer(); //will wait for infinite time
             std::cout << "\nGoing to the position: x= " << goal.x << " y= " << goal.y << " theta = " << goal.theta << std::endl;
             ac.sendGoal(goal);
-
-            bool finished_before_timeout = ac.waitForResult(ros::Duration(60.0));
-            if (finished_before_timeout)
+            while (true)
             {
-                actionlib::SimpleClientGoalState state = ac.getState();
-                ROS_INFO("Action finished: %s", state.toString().c_str());
+                ros::spinOnce();
+                if (start == false)
+                {
+                    ac.cancelGoal();
+                    ROS_INFO("\nThe Goal has been Cancelled\n");
+                    break;
+                }
+                else
+                {
+                    if (ac.getState() == actionlib::SimpleClientGoalState::SUCCEEDED)
+                    {
+                        std::cout << "Position reached" << std::endl;
+                        break;
+                    }
+                }
             }
-            else
-                ROS_INFO("Action did not finish before the time out.");
-
-            std::cout << "Position reached" << std::endl;
         }
     }
     return 0;
