@@ -137,7 +137,7 @@ class GoToPointAction(object):
         while True:
 
             # helper variables
-            r = rospy.Rate(1)
+            #r = rospy.Rate(1)
 
             # check that preempt has not been requested by the client
             if self._as.is_preempt_requested():

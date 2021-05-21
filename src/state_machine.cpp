@@ -30,7 +30,7 @@ int main(int argc, char **argv)
     actionlib::SimpleActionClient<rt2_assignment1::PositionAction> ac("go_to_point", true);
 
     rt2_assignment1::RandomPosition rp;
-    rt2_assignment1::PositionAction goal;
+    rt2_assignment1::PositionGoal goal;
 
     rp.request.x_max = 5.0;
     rp.request.x_min = -5.0;
@@ -48,10 +48,17 @@ int main(int argc, char **argv)
             goal.theta = rp.response.theta;
 
             ac.waitForServer(); //will wait for infinite time
-            std::cout << "\nGoing to the position: x= " << p.request.x << " y= " << p.request.y << " theta = " << p.request.theta << std::endl;
+            std::cout << "\nGoing to the position: x= " << goal.x << " y= " << goal.y << " theta = " << goal.theta << std::endl;
             ac.sendGoal(goal);
 
-            bool finished_before_timeout = ac.waitForResult(ros::Duration(30.0));
+            bool finished_before_timeout = ac.waitForResult(ros::Duration(60.0));
+            if (finished_before_timeout)
+            {
+                actionlib::SimpleClientGoalState state = ac.getState();
+                ROS_INFO("Action finished: %s", state.toString().c_str());
+            }
+            else
+                ROS_INFO("Action did not finish before the time out.");
 
             std::cout << "Position reached" << std::endl;
         }
