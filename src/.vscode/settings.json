@@ -1,0 +1,13 @@
+{
+    "python.autoComplete.extraPaths": [
+        "/home/omotoye/ros2_ws/install/tutorial_interfaces/lib/python3.8/site-packages",
+        "/home/omotoye/ros2_ws/install/turtlesim_controll/lib/python3.8/site-packages",
+        "/home/omotoye/ros2_ws/install/turtlesim/lib/python3.8/site-packages",
+        "/home/omotoye/ros2_ws/install/rt2_assignment1/lib/python3.8/site-packages",
+        "/home/omotoye/ros2_ws/install/py_srvcli/lib/python3.8/site-packages",
+        "/home/omotoye/ros2_ws/install/py_pubsub/lib/python3.8/site-packages",
+        "/home/omotoye/ros2_ws/install/group_exercise/lib/python3.8/site-packages",
+        "/home/omotoye/ros2_ws/install/class_exercise1/lib/python3.8/site-packages",
+        "/opt/ros/foxy/lib/python3.8/site-packages"
+    ]
+}
