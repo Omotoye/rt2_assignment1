@@ -20,5 +20,6 @@
 
   <export>
     <build_type>ament_cmake</build_type>
+    <depend>rt2_assignment1</depend>
   </export>
 </package>

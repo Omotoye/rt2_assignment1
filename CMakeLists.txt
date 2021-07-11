@@ -19,8 +19,8 @@ endif()
 find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
-find_package(rosidl_default_generators REQUIRED)
 find_package(rclcpp_components REQUIRED)
+find_package(rosidl_default_generators REQUIRED)
 
 rosidl_generate_interfaces(${PROJECT_NAME}
 "srv/Command.srv"
@@ -28,32 +28,23 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 "srv/RandomPosition.srv"
 )
 
-add_library(state_machine_component SHARED src/state_machine.cpp)
 add_library(position_server_component SHARED src/position_server.cpp)
 
-rosidl_target_interfaces(state_machine_component ${PROJECT_NAME} "rosidl_typesupport_cpp")
 rosidl_target_interfaces(position_server_component ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
-rclcpp_components_register_node(state_machine_component PLUGIN "rt2_assignment1::StateMachine" EXECUTABLE comp_state_machine)
-rclcpp_components_register_node(position_server_component PLUGIN "rt2_assignment1::RandomPositionServer" EXECUTABLE comp_position_server)
-
-ament_target_dependencies(state_machine_component rclcpp rclcpp_components std_msgs)
-ament_target_dependencies(position_server_component rclcpp rclcpp_components std_msgs)
-
-install(TARGETS state_machine_component  
-DESTINATION lib/${PROJECT_NAME} LIBRARY DESTINATION lib)
-
-install(TARGETS position_server_component
-DESTINATION lib/${PROJECT_NAME} LIBRARY DESTINATION lib)
+rclcpp_components_register_node(position_server_component
+PLUGIN "rt2_assignment1::RandomPositionServer"
+EXECUTABLE comp_position_server)
 
 
-#add_executable(position_service src/position_service.cpp)
-#ament_target_dependencies(position_service
-#rclcpp )
-#
-#add_executable(state_machine src/state_machine.cpp)
-#ament_target_dependencies(state_machine
-#rclcpp )
+ament_target_dependencies(position_server_component rclcpp rclcpp_components std_msgs )
+
+install(TARGETS
+position_server_component
+comp_position_server
+DESTINATION lib/${PROJECT_NAME}
+LIBRARY DESTINATION lib)
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
