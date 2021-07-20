@@ -1,0 +1,7 @@
+# For vscode stuff
+*.vscode
+*-vscode
+
+# for python file
+*.pyc
+*__pycache__

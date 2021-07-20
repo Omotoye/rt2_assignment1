@@ -1,0 +1,427 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <title>Indices and tables &mdash; rt2_assignment1 0.01 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+
+  
+  
+
+  
+  
+
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="#" class="icon icon-home"> rt2_assignment1
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Indices and tables</a></li>
+<li><a class="reference internal" href="#welcome-to-rt2-assignment1-s-documentation">Welcome to rt2_assignment1’s documentation!</a><ul>
+<li><a class="reference internal" href="#module-scripts.go_to_point">GoToPoint Module</a></li>
+<li><a class="reference internal" href="#module-scripts.user_interface">User Interface Module</a></li>
+<li><a class="reference internal" href="#position-service">Position Service</a></li>
+<li><a class="reference internal" href="#state-machine">State Machine</a></li>
+</ul>
+</li>
+</ul>
+</div>
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">rt2_assignment1</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="#" class="icon icon-home"></a> &raquo;</li>
+        
+      <li>Indices and tables</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+          
+            <a href="_sources/index.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="toctree-wrapper compound">
+</div>
+<div class="section" id="indices-and-tables">
+<h1>Indices and tables<a class="headerlink" href="#indices-and-tables" title="Permalink to this headline">¶</a></h1>
+<ul class="simple">
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
+<li><p><a class="reference internal" href="py-modindex.html"><span class="std std-ref">Module Index</span></a></p></li>
+<li><p><a class="reference internal" href="search.html"><span class="std std-ref">Search Page</span></a></p></li>
+</ul>
+</div>
+<div class="section" id="welcome-to-rt2-assignment1-s-documentation">
+<h1>Welcome to rt2_assignment1’s documentation!<a class="headerlink" href="#welcome-to-rt2-assignment1-s-documentation" title="Permalink to this headline">¶</a></h1>
+<p>This is the documentation of the RT2_assignment2 package!</p>
+<div class="section" id="module-scripts.go_to_point">
+<span id="gotopoint-module"></span><h2>GoToPoint Module<a class="headerlink" href="#module-scripts.go_to_point" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-go_to_point"></span><p>This node controls a mobile robot to move from it position to some target position</p>
+<dl class="simple">
+<dt>Subscribes to:</dt><dd><p>/odom topic where the simulator publishes the robot position</p>
+</dd>
+<dt>Publishes to:</dt><dd><p>/cmd_vel velocity to move to the desired robot positions</p>
+</dd>
+<dt>Service:</dt><dd><p>/go_to_point_switch accepts a request to go to a target position</p>
+</dd>
+</dl>
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.go_to_point.check_preempt">
+<span class="sig-prename descclassname"><span class="pre">scripts.go_to_point.</span></span><span class="sig-name descname"><span class="pre">check_preempt</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#check_preempt"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.check_preempt" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is function is used for checking if a preemption has be
+requested from the UI node.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>True if preempt is request and False otherwise.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>[<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)">bool</a>]</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.go_to_point.clbk_odom">
+<span class="sig-prename descclassname"><span class="pre">scripts.go_to_point.</span></span><span class="sig-name descname"><span class="pre">clbk_odom</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#clbk_odom"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.clbk_odom" title="Permalink to this definition">¶</a></dt>
+<dd><p>Callback function for handling Odometry message comming from the
+odom topic</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>msg</strong> (<em>[</em><em>Odometry</em><em>]</em>) – The Odometry message coming from the odom topic.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="scripts.go_to_point.go_to_point">
+<span class="sig-prename descclassname"><span class="pre">scripts.go_to_point.</span></span><span class="sig-name descname"><span class="pre">go_to_point</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">goal</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/scripts/go_to_point.html#go_to_point"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#scripts.go_to_point.go_to_point" title="Permalink to this definition">¶</a></dt>
+<dd><p>This is a callback function that handles the go to point action,
+it calls all other functions that helps it achieve the goal of getting
+to the goal pose.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>goal</strong> – This is an object that contains the target pose that the robot is</p></li>
+<li><p><strong>reach.</strong> (<em>required to</em>) – </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-scripts.user_interface">
+<span id="user-interface-module"></span><h2>User Interface Module<a class="headerlink" href="#module-scripts.user_interface" title="Permalink to this headline">¶</a></h2>
+<span class="target" id="module-user_interface"></span><p>This node prompts the user to enter a command that is going to be sent to the state machine
+to perform a required task</p>
+<dl class="simple">
+<dt>Service:</dt><dd><p>/user_interface sends the command to the state machine</p>
+</dd>
+</dl>
+</div>
+<div class="section" id="position-service">
+<h2>Position Service<a class="headerlink" href="#position-service" title="Permalink to this headline">¶</a></h2>
+<p>This file implements a position service. </p>
+<p><p>Services :</p>
+<p>\posiiton_server</p>
+<dl class="simple">
+<dt><strong>Author</strong></dt><dd><p>Omotoye Shamsudeen Adekoya </p>
+</dd>
+<dt><strong>Version</strong></dt><dd><p>0.01 </p>
+</dd>
+<dt><strong>Date</strong></dt><dd><p>20/07/2021</p>
+</dd>
+</dl>
+</p>
+<p>Description :</p>
+<p>This node advertises a position service. When the service is required, a request containing minimum and maximum values for the x and y position is used to generate a random position between x (or y) min and x (or y) max. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv48randMToNdd">
+<span id="_CPPv38randMToNdd"></span><span id="_CPPv28randMToNdd"></span><span id="randMToN__double.double"></span><span class="target" id="position__service_8cpp_1a10f83119b77a8fbd085a5550955f85ff"></span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">randMToN</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">M</span></span>, <span class="kt"><span class="pre">double</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">N</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48randMToNdd" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>random number generator </p>
+<p>
+This function generates a random number between M and N </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>M</strong> – defines the minimum possible value of the random number </p></li>
+<li><p><strong>N</strong> – defines the maximum possible value of the random number</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>the random number</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv48myrandomRN15rt2_assignment114RandomPosition7RequestERN15rt2_assignment114RandomPosition8ResponseE">
+<span id="_CPPv38myrandomRN15rt2_assignment114RandomPosition7RequestERN15rt2_assignment114RandomPosition8ResponseE"></span><span id="_CPPv28myrandomRN15rt2_assignment114RandomPosition7RequestERN15rt2_assignment114RandomPosition8ResponseE"></span><span id="myrandom__rt2_assignment1::RandomPosition::RequestR.rt2_assignment1::RandomPosition::ResponseR"></span><span class="target" id="position__service_8cpp_1ab65b9ff5368189ad34fe4989d50742e4"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">myrandom</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">rt2_assignment1</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RandomPosition</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Request</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">req</span></span>, <span class="n"><span class="pre">rt2_assignment1</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">RandomPosition</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Response</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">res</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv48myrandomRN15rt2_assignment114RandomPosition7RequestERN15rt2_assignment114RandomPosition8ResponseE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv44mainiPPc">
+<span id="_CPPv34mainiPPc"></span><span id="_CPPv24mainiPPc"></span><span id="main__i.cPP"></span><span class="target" id="position__service_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">main</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">argc</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argv</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv44mainiPPc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>main function </p>
+<p>
+The main funtion initializes the node and service object and waits to receive a request to the initialized service. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>argc</strong> – </p></li>
+<li><p><strong>argv</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>always 0</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="state-machine">
+<h2>State Machine<a class="headerlink" href="#state-machine" title="Permalink to this headline">¶</a></h2>
+<p>This file implement a state machine that start and stops a go to point goal. </p>
+<p><p>Services :</p>
+<p>° /user_interface ° /position_server</p>
+<dl class="simple">
+<dt><strong>Author</strong></dt><dd><p>Omotoye Shamsudeen Adekoya </p>
+</dd>
+<dt><strong>Version</strong></dt><dd><p>0.01 </p>
+</dd>
+<dt><strong>Date</strong></dt><dd><p>20/07/2021</p>
+</dd>
+</dl>
+<dl class="field-list simple">
+<dt class="field-odd">param start</dt>
+<dd class="field-odd"><p>boolean to know if to start of stop the go to point action</p>
+</dd>
+</dl>
+</p>
+<p><p>Action :</p>
+<p>/go_to_point</p>
+</p>
+<p>Description :</p>
+<p>This node acts as a state machine for requesting the goal action server to a point received from the user_interface client or cancel target based on the request sent from the user_interface </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv414user_interfaceRN15rt2_assignment17Command7RequestERN15rt2_assignment17Command8ResponseE">
+<span id="_CPPv314user_interfaceRN15rt2_assignment17Command7RequestERN15rt2_assignment17Command8ResponseE"></span><span id="_CPPv214user_interfaceRN15rt2_assignment17Command7RequestERN15rt2_assignment17Command8ResponseE"></span><span id="user_interface__rt2_assignment1::Command::RequestR.rt2_assignment1::Command::ResponseR"></span><span class="target" id="state__machine_8cpp_1a1a9543636935547580c0657f4c7c0c2b"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">user_interface</span></span></span><span class="sig-paren">(</span><span class="n"><span class="pre">rt2_assignment1</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Command</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Request</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">req</span></span>, <span class="n"><span class="pre">rt2_assignment1</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Command</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">Response</span></span><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">res</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv414user_interfaceRN15rt2_assignment17Command7RequestERN15rt2_assignment17Command8ResponseE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>callback function for handling the request sent from the user interface </p>
+<p>
+This function receives the request sent from the user interface client and set the value the start global variable. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>req</strong> – the request sent from the client </p></li>
+<li><p><strong>res</strong> – the response to be sent from the server to the client </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>always true as this function cannot fail.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp">
+<span class="target" id="state__machine_8cpp_1a3c04138a5bfe5d72780bb7e82a18e627"></span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">main</span></span></span><span class="sig-paren">(</span><span class="kt"><span class="pre">int</span></span><span class="w"> </span><span class="n sig-param"><span class="pre">argc</span></span>, <span class="kt"><span class="pre">char</span></span><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="p"><span class="pre">*</span></span><span class="n sig-param"><span class="pre">argv</span></span><span class="sig-paren">)</span><br /></dt>
+<dd><p>main function </p>
+<p>
+The main funtion initializes the node, service and action client object and waits to receive a request to the initialized service. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>argc</strong> – </p></li>
+<li><p><strong>argv</strong> – </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>always 0</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-variables">Variables</p>
+<dl class="cpp var">
+<dt class="sig sig-object cpp" id="_CPPv45start">
+<span id="_CPPv35start"></span><span id="_CPPv25start"></span><span id="start__b"></span><span class="target" id="state__machine_8cpp_1ab376b87f96a574a793c03c53e75afec8"></span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">start</span></span></span><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="k"><span class="pre">false</span></span><a class="headerlink" href="#_CPPv45start" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>For setting the value of the request from the user interface. </p>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &#169; Copyright 2021, Omotoye Shamsudeen Adekoya.
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

@@ -1,5 +1,24 @@
 #! /usr/bin/env python
 
+"""
+.. module:: go_to_point
+    :platform: Unix
+    :synopsis: Python module for control of a mobile robot to navigate to a target point
+
+.. moduleauthor:: Omotoye Adekoya adekoyaomotoye@gmail.com 
+
+This node controls a mobile robot to move from it position to some target position
+
+Subscribes to:
+    /odom topic where the simulator publishes the robot position
+
+Publishes to: 
+    /cmd_vel velocity to move to the desired robot positions
+    
+Service:
+    /go_to_point_switch accepts a request to go to a target position 
+    
+"""
 
 import rospy
 from geometry_msgs.msg import Twist, Point
@@ -34,6 +53,12 @@ _result = rt2_assignment1.msg.PositionResult()
 
 
 def check_preempt():
+    """This is function is used for checking if a preemption has be
+    requested from the UI node. 
+
+    Returns:
+        [bool]: True if preempt is request and False otherwise. 
+    """
     # check that preempt has not been requested by the client
     if _as.is_preempt_requested():
         print('The Goal has been Preempted')
@@ -44,6 +69,12 @@ def check_preempt():
 
 
 def clbk_odom(msg):
+    """Callback function for handling Odometry message comming from the
+    odom topic 
+
+    Args:
+        msg ([Odometry]): The Odometry message coming from the odom topic. 
+    """
     global position_
     global yaw_
     global pose 
@@ -146,6 +177,14 @@ def done():
 
 
 def go_to_point(goal):
+    """This is a callback function that handles the go to point action, 
+    it calls all other functions that helps it achieve the goal of getting 
+    to the goal pose. 
+
+    Args:
+        goal : This is an object that contains the target pose that the robot is
+        required to reach. 
+    """
     desired_position = Point()
     desired_position.x = goal.x
     desired_position.y = goal.y
