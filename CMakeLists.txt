@@ -52,6 +52,10 @@ comp_state_machine
 DESTINATION lib/${PROJECT_NAME}
 LIBRARY DESTINATION lib)
 
+install(
+FILES mapping_rule.yaml
+DESTINATION share/${PROJECT_NAME})
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
