@@ -1,3 +1,6 @@
+#include <chrono>
+#include <cinttypes>
+#include <cstdlib>
 #include <inttypes.h>
 #include <memory>
 #include "rclcpp/rclcpp.hpp"
@@ -7,6 +10,7 @@
 #include "rt2_assignment1/srv/command.hpp"
 #include "rt2_assignment1/srv/random_position.hpp"
 
+using namespace std::chrono_literals;
 using Command = rt2_assignment1::srv::Command;
 using RandomPosition = rt2_assignment1::srv::RandomPosition;
 using Position = rt2_assignment1::srv::Position;
@@ -19,55 +23,81 @@ namespace rt2_assignment1
     class StateMachine : public rclcpp::Node
     {
     public:
-        StateMachine(const rclcpp::NodeOptions &options) : Node("random_position_server", options)
+        bool pose_ready = false;
+        StateMachine(const rclcpp::NodeOptions &options) : Node("state_machine", options)
         {
             service_ = this->create_service<Command>(
-                "/position_server", std::bind(&StateMachine::user_interface, this, _1, _2, _3));
+                "/user_interface", std::bind(&StateMachine::user_interface, this, _1, _2, _3));
 
             client1_ = this->create_client<RandomPosition>("/position_server");
-            while (!client1_->wait_for_service(std::chrono::seconds(1)))
-            {
-                if (!rclcpp::ok())
-                {
-                    RCLCPP_ERROR(this->get_logger(), "client interrupted while waiting for service to appear.");
-                    return;
-                }
-                RCLCPP_INFO(this->get_logger(), "waiting for service to appear...");
-            }
+            // while (!client1_->wait_for_service(std::chrono::seconds(1)))
+            // {
+            //     if (!rclcpp::ok())
+            //     {
+            //         RCLCPP_ERROR(this->get_logger(), "client interrupted while waiting for service to appear.");
+            //         return;
+            //     }
+            //     RCLCPP_INFO(this->get_logger(), "waiting for service to appear...");
+            // }
 
             client2_ = this->create_client<Position>("/go_to_point");
-            while (!client2_->wait_for_service(std::chrono::seconds(1)))
-            {
-                if (!rclcpp::ok())
-                {
-                    RCLCPP_ERROR(this->get_logger(), "client interrupted while waiting for service to appear.");
-                    return;
-                }
-                RCLCPP_INFO(this->get_logger(), "waiting for service to appear...");
-            }
+            // while (!client2_->wait_for_service(std::chrono::seconds(1)))
+            // {
+            //     if (!rclcpp::ok())
+            //     {
+            //         RCLCPP_ERROR(this->get_logger(), "client interrupted while waiting for service to appear.");
+            //         return;
+            //     }
+            //     RCLCPP_INFO(this->get_logger(), "waiting for service to appear...");
+            // }
+            timer1_ = this->create_wall_timer(
+                2000ms, std::bind(&StateMachine::call_server1, this));
+            timer2_ = this->create_wall_timer(
+                2000ms, std::bind(&StateMachine::call_server2, this));
+        }
+        void call_server1()
+        {
             this->request_1 = std::make_shared<RandomPosition::Request>();
-            this->request_2 = std::make_shared<Position::Request>();
             this->response_1 = std::make_shared<RandomPosition::Response>();
-            this->response_2 = std::make_shared<Position::Response>();
-        }
-        void call_client1()
-        {
-            request_1->x_max = 5.0;
-            request_1->x_min = -5.0;
-            request_1->y_max = 5.0;
-            request_1->y_min = -5.0;
 
-            auto result_future = client1_->async_send_request(request_1);
-            this->response_1 = result_future.get();
+            using ServiceResponseFuture =
+                rclcpp::Client<RandomPosition>::SharedFuture;
+            auto response_received_callback = [this](ServiceResponseFuture future)
+            {
+                this->response_1 = future.get();
+                pose_ready = true;
+            };
+
+            this->request_1->x_max = 5.0;
+            this->request_1->x_min = -5.0;
+            this->request_1->y_max = 5.0;
+            this->request_1->y_min = -5.0;
+            if (start == true)
+            {
+                auto future_result = client1_->async_send_request(this->request_1, response_received_callback);
+            }
         }
-        void call_client2()
+        void call_server2()
         {
-            request_2->x = this->response_1->x;
-            request_2->y = this->response_1->y;
-            request_2->theta = this->response_1->theta;
-            std::cout << "\nGoing to the position: x= " << request_2->x << " y= " << request_2->y << " theta = " << request_2->theta << std::endl;
-            auto result_future = client2_->async_send_request(request_2);
-            this->response_2 = result_future.get();
+            this->request_2 = std::make_shared<Position::Request>();
+            this->response_2 = std::make_shared<Position::Response>();
+
+            using ServiceResponseFuture =
+                rclcpp::Client<Position>::SharedFuture;
+            auto response_received_callback = [this](ServiceResponseFuture future)
+            {
+                this->response_2 = future.get();
+            };
+
+            this->request_2->x = this->response_1->x;
+            this->request_2->y = this->response_1->y;
+            this->request_2->theta = this->response_1->theta;
+            if (start == true && pose_ready == true)
+            {
+                pose_ready = false;
+                std::cout << "\nGoing to the position: x= " << this->request_2->x << " y= " << this->request_2->y << " theta = " << this->request_2->theta << std::endl;
+                auto future_result = client2_->async_send_request(this->request_2, response_received_callback);
+            }
         }
 
     private:
@@ -91,14 +121,17 @@ namespace rt2_assignment1
             return true;
         }
 
+        rclcpp::Client<RandomPosition>::SharedPtr client1_;
+        rclcpp::Client<Position>::SharedPtr client2_;
+        rclcpp::Service<Command>::SharedPtr service_;
+
+        rclcpp::TimerBase::SharedPtr timer1_;
+        rclcpp::TimerBase::SharedPtr timer2_;
+
         std::shared_ptr<RandomPosition::Request> request_1;
         std::shared_ptr<Position::Request> request_2;
         std::shared_ptr<RandomPosition::Response> response_1;
         std::shared_ptr<Position::Response> response_2;
-
-        rclcpp::Client<RandomPosition>::SharedPtr client1_;
-        rclcpp::Client<Position>::SharedPtr client2_;
-        rclcpp::Service<Command>::SharedPtr service_;
     };
 }
 

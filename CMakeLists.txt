@@ -29,19 +29,26 @@ rosidl_generate_interfaces(${PROJECT_NAME}
 )
 
 add_library(position_server_component SHARED src/position_server.cpp)
+add_library(state_machine_component SHARED src/state_machine.cpp)
 
 rosidl_target_interfaces(position_server_component ${PROJECT_NAME} "rosidl_typesupport_cpp")
+rosidl_target_interfaces(state_machine_component ${PROJECT_NAME} "rosidl_typesupport_cpp")
 
 rclcpp_components_register_node(position_server_component
 PLUGIN "rt2_assignment1::RandomPositionServer"
 EXECUTABLE comp_position_server)
-
+rclcpp_components_register_node(state_machine_component
+PLUGIN "rt2_assignment1::StateMachine"
+EXECUTABLE comp_state_machine)
 
 ament_target_dependencies(position_server_component rclcpp rclcpp_components std_msgs )
+ament_target_dependencies(state_machine_component rclcpp rclcpp_components std_msgs )
 
 install(TARGETS
 position_server_component
 comp_position_server
+state_machine_component
+comp_state_machine
 DESTINATION lib/${PROJECT_NAME}
 LIBRARY DESTINATION lib)
 
