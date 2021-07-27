@@ -74,6 +74,7 @@ Also the structure of the **Position.srv** message sent between the node was cha
 -   float32 theta
 -   ---
 -   bool ok   #response
+
 +   float32 x
 +   float32 y     #goal
 +   float32 theta
@@ -87,4 +88,34 @@ Also the structure of the **Position.srv** message sent between the node was cha
 ## ROS2 Package Description
 
 This package does exactly thesame thing that the package in the master branch does, the only difference is that it does part of it with **ros2**,  [click here](https://github.com/Omotoye/rt2_assignment1/tree/ros2) to go to the ros2 branch. The package in both the **master** and **action** branch is written specifically for **_ROS Noetic Ninjemys_**. The package in the **ros2** branch allow some parts of the simulation (**state_machine and random_position is controlled from ros2**) to be control from a *__ROS 2 Foxy Fitzroy__* package. This is made possible by a package called [ros1_bridge](https://github.com/ros2/ros1_bridge "ros1_brige"), this package helps to bridge the messages from a **ros2** package with messages in **ros** package which then enable communication between the nodes of the package. _Instructions on how to compile and launch the ros1_brige can be found in the readme contained in the ros2 branch; **all required configurations has already been made to the package**_.
+
+## The CoppeliaSim Simulation Scene
+<div align="center">
+<img src="images/pioneer_robot_model.png" width="50%" height="50%" title="Two Wheeled non-holonomic robot" alt="Two Wheeled non-holonomic robot" >
+</div>
+
+A CoppeliaSim scene can also be found in this package (**exclusive to master/action branch**), this scene contains a Pioneer Mobile robot which can be controlled with thesame controller used for the **Gazebo Two Wheeled Robot**, the pioneer robot controller script has be written in such a way that is can be controlled with the nodes of this package, however the script does not allow a single **cmd_vel** velocity command for moving the robot about the simulation; for this reason an additional python script is added for publishing the required velocity command when using the CoppeliaSim scene for the simulation. The script is called **_pioneer_velocity_publisher.py_**. Information about the script given below.
+
+### Pioneer Velocity Publisher (_pioneer_velocity_publisher.py_)
+This node subcribes to the **cmd_vel** command coming from the go to point node, it then determines the required velocity that should be published to the velocity topics (**_/leftwheel_vel, /rightwheel_vel_**) connected to the wheel of the pioneer robot. The callback function below describes the script better. 
+
+```python
+def handle_wheel_velocity(msg):
+    """This is a callback function that takes in the cmd_vel command from the go to point
+    node and then interprets it to the required velocity for each of the wheels of the pioneer robot
+
+    Args:
+        msg ([Twist]): Linear and angular velocity command from the go to point node
+    """
+    global vel_l, vel_r
+    if (msg.linear.x > 0 or msg.linear.x < 0):
+        vel_l.data = msg.linear.x 
+        vel_r.data = msg.linear.x 
+    elif(msg.angular.z > 0):
+        vel_l.data = msg.angular.z
+        vel_r.data = -(msg.angular.z)
+    elif(msg.angular.z < 0):
+        vel_l.data = -(msg.angular.z)
+        vel_r.data = msg.angular.z
+```
 
