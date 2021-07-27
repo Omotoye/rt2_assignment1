@@ -1,0 +1,13 @@
+<map id="src/state_machine.cpp" name="src/state_machine.cpp">
+<area shape="rect" id="node1" title="This file implement a state machine that start and stops a go to point goal." alt="" coords="423,5,591,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,87,72,114"/>
+<area shape="rect" id="node3" title=" " alt="" coords="96,87,179,114"/>
+<area shape="rect" id="node4" title=" " alt="" coords="203,87,269,114"/>
+<area shape="rect" id="node5" title=" " alt="" coords="293,87,379,114"/>
+<area shape="rect" id="node6" title=" " alt="" coords="404,87,481,114"/>
+<area shape="rect" id="node7" title=" " alt="" coords="506,87,638,114"/>
+<area shape="rect" id="node8" title=" " alt="" coords="663,80,865,121"/>
+<area shape="rect" id="node9" title=" " alt="" coords="889,80,1044,121"/>
+<area shape="rect" id="node10" title=" " alt="" coords="1068,80,1223,121"/>
+<area shape="rect" id="node11" title=" " alt="" coords="1247,80,1409,121"/>
+</map>
