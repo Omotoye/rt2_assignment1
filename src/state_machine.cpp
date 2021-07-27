@@ -1,3 +1,30 @@
+/**
+* \file state_machine.cpp
+* \brief This file implement a state machine that start and stops a go to point goal
+* \author Omotoye Shamsudeen Adekoya
+* \version 0.01
+* \date 20/07/2021
+*
+* \param start boolean to know if to start of stop the go to point action
+*
+* \details
+*
+*
+* Services : <BR>
+* ° /user_interface
+* ° /position_server
+* 
+* Service : <BR>
+*   /go_to_point
+*
+* Description :
+*
+* This node acts as a state machine for requesting the go to point server to go
+* a point received from the user_interface client or cancel target based on the 
+* request sent from the user_interface  
+*
+*/
+
 #include <chrono>
 #include <cinttypes>
 #include <cstdlib>
@@ -101,8 +128,18 @@ namespace rt2_assignment1
         }
 
     private:
-        bool start = false;
+        bool start = false; ///< For setting the value of the request from the user interface
 
+        /**
+        * \brief callback function for handling the request sent from the user interface
+        * \param req the request sent from the client
+        * \param res the response to be sent from the server to the client 
+        * \return always true as this function cannot fail.
+        *
+        * This function receives the request sent from the user interface client and set the value
+        * the start global variable. 
+        *
+        */
         bool user_interface(
             const std::shared_ptr<rmw_request_id_t> request_header,
             const std::shared_ptr<Command::Request> req,
@@ -134,7 +171,7 @@ namespace rt2_assignment1
         std::shared_ptr<Position::Response> response_2;
     };
 }
-
+// Registering the State Machine Node 
 RCLCPP_COMPONENTS_REGISTER_NODE(rt2_assignment1::StateMachine)
 
 //int main(int argc, char *argv[])

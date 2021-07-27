@@ -1,9 +1,28 @@
+/**
+* \file position_service.cpp
+* \brief This file implements a position service
+* \author Omotoye Shamsudeen Adekoya
+* \version 0.01
+* \date 20/07/2021
+*
+* \details
+*
+* Services : <BR>
+*      \posiiton_server
+*
+* Description :
+*
+* This node advertises a position service. When the service is required, a request containing
+* minimum and maximum values for the x and y position is used to generate a random position 
+* between x (or y) min and x (or y) max.
+*
+*/
+
 #include <inttypes.h>
 #include <memory>
 #include "rt2_assignment1/srv/random_position.hpp"
 #include "rclcpp/rclcpp.hpp"
 #include "rclcpp_components/register_node_macro.hpp"
-
 
 using RandomPosition = rt2_assignment1::srv::RandomPosition;
 using std::placeholders::_1;
@@ -23,6 +42,16 @@ namespace rt2_assignment1
         }
 
     private:
+        /**
+        * \brief random number generator
+        * \param M defines the minimum possible value of the random number 
+        * \param N defines the maximum possible value of the random number
+ *  
+        * \return the random number
+        * 
+        * This function generates a random number between M and N 
+        */
+
         double randMToN(double M, double N)
         {
             return M + (rand() / (RAND_MAX / (N - M)));
@@ -42,6 +71,7 @@ namespace rt2_assignment1
         rclcpp::Service<RandomPosition>::SharedPtr service_;
     };
 }
+// Registering the position server node   
 RCLCPP_COMPONENTS_REGISTER_NODE(rt2_assignment1::RandomPositionServer)
 
 //
