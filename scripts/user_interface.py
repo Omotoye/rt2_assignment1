@@ -1,3 +1,15 @@
+"""
+.. module:: user_interface
+    :platform: Unix
+    :synopsis: Python module that acts as a user interface for getting user commands
+.. moduleauthor:: Omotoye Adekoya adekoyaomotoye@gmail.com 
+This node prompts the user to enter a command that is going to be sent to the state machine 
+to perform a required task
+Service:
+    /user_interface sends the command to the state machine
+    
+"""
+
 import rospy
 import time
 from rt2_assignment1.srv import Command

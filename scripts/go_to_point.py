@@ -1,5 +1,20 @@
 #! /usr/bin/env python
 
+"""
+.. module:: go_to_point
+    :platform: Unix
+    :synopsis: Python module for control of a mobile robot to navigate to a target point
+.. moduleauthor:: Omotoye Adekoya adekoyaomotoye@gmail.com 
+This node controls a mobile robot to move from it position to some target position
+Subscribes to:
+    /odom topic where the simulator publishes the robot position
+Publishes to: 
+    /cmd_vel velocity to move to the desired robot positions
+    
+Service:
+    /go_to_point_switch accepts a request to go to a target position 
+    
+"""
 
 import rospy
 from geometry_msgs.msg import Twist, Point
@@ -26,6 +41,12 @@ lb_a = -0.5
 ub_d = 0.6
 
 def clbk_odom(msg):
+    """Callback function for handling Odometry message comming from the
+    odom topic 
+    
+    Args:
+        msg ([Odometry]): The Odometry message coming from the odom topic. 
+    """
     global position_
     global yaw_
 
@@ -119,6 +140,14 @@ def done():
     pub_.publish(twist_msg)
     
 def go_to_point(req):
+    
+    """This is a callback function that handles the go to point service, 
+    it calls all other functions that helps it achieve the goal of getting 
+    to the goal pose. 
+    Args:
+        goal : This is an object that contains the target pose that the robot is
+        required to reach. 
+    """
     desired_position = Point()
     desired_position.x = req.x
     desired_position.y = req.y
