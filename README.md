@@ -129,3 +129,78 @@ The next iteration of this project can be found in [Second Assignment of the Rea
 <strong> The start and Stop buttons </strong>
 </div>
 
+# How to Compile and Launch the Package (*master and action branch*)
+**NB**: The instructions below is meant for the **_master_** and **_action_** branch of this repository which is written for _**ROS Noetic Ninjemys**_. To compile and launch the package in the **ros2** branch please consult the readme provided in the [ros2 branch](https://github.com/Omotoye/rt2_assignment1/tree/ros2).
+
+## Compile
+
+First you create a folder for your catkin workspace
+
+```bash
+mkdir -p ~/catkin_ws/src
+```
+
+Clone the package repository
+
+```bash
+cd ~/catkin_ws/src
+git clone https://github.com/Omotoye/rt2_assignment1.git
+```
+If you want to work with the action branch 
+```bash
+cd ~/catkin_ws/src/rt2_assignment1
+git checkout action 
+```
+
+Once the package has been successfully cloned, you then build the workspace
+
+```bash
+source /opt/ros/noetic/setup.bash
+cd ~/catkin_ws/
+catkin_make
+```
+### More commands for using the CoppeliaSim Scene 
+[Click here](https://www.coppeliarobotics.com/downloads) to download the CoppeliaSim software. Unzip the package and put the folder preferably in the home directory (*you can put the folder anywhere*). 
+
+
+## Launch
+
+Step one, source the setup.bash file, if you followed the steps above, then you can enter the command below.
+
+```bash
+source ~/catkin_ws/devel/setup.bash
+```
+
+If you didnt follow the initial steps because you already have a workspace, trace a path from you home directory to your catkin workspace down to your setup.bash file. An Example is shown below, **_THIS WILL NOT WORK FOR YOU, IT IS JUST AN EXAMPLE TO SHOW HOW IT CAN BE DONE_**
+
+```bash
+source /home/omotoye/catkin_ws/devel/setup.bash
+```
+### For Gazebo Simulation
+
+There is only one launch file to start the gazebo simulation, state machine and the random position server node. Enter the command below to launch the node for the gazebo simulation.
+
+```bash
+roslaunch rt2_assignment1 sim.launch
+```
+
+### For CoppeliaSim Scene 
+There is a launch file for launch all the required nodes for the coppeliasim scene, however the coppeliasim software cannot be run through a ros launch file, so some extra steps would be taken for that. 
+
+First, you run the **ros master** so the ros plugin can be loaded successfully when launching the CoppeliaSim software. Run the command below to do that. 
+```bash 
+roscore & # the & symbol allows the the process to be ran as a background process  
+```
+Navigate into the directory of the CoppeliaSim folder, if you put it on your home directly as adviced, enter the command below, otherwise cd into the folder from where ever you put it and run the launch script with the second command below. 
+```bash
+cd ~/CoppeliaSim_Edu_V4_2_0_Ubuntu20_04
+./coppeliaSim.sh
+```
+After launching the CoppeliaSim software, click on **File/Open Scene** and then navigate to the path of the scene which is in the **CoppeliaSim-Scene/pioneerROS.ttt** inside this repository that you cloned (**master or action branch**). Press the Play button to start the simulation then enter the command below to launch all the required node for the simulation. 
+```bash
+roslaunch rt2_assignment1 pioneer_sim.launch
+```
+Follow the instructions from the command line User Interface. 
+
+
+
