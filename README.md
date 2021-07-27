@@ -16,9 +16,18 @@
 <img src="images/rviz-robotmodel.png" width="50%" height="50%" title="Two Wheeled non-holonomic robot" alt="Two Wheeled non-holonomic robot" >
 </div>
 
-The package contains the nodes and the simulation environment for controlling a mobile robot in the Gazebo simulation environment.
-To launch the node, please run:
-```
-roslaunch rt2_assignment1 sim.launch
-```
+>This package contains the nodes and the simulation environments for controlling a mobile robot in the Gazebo simulation environment and CoppeliaSim simulation environment.
 
+# ROS Package Description 
+There are three branches in this github repository; _**master, action**_ and _**ros2**_, each of this branch controls the mobile robot is their own unique way and it would all be decribed below. 
+
+## General Package Architecture Description 
+The architecture is contained of **four** nodes; 
+
+*   _**user_interface**_
+*   _**random_position**_
+*   _**state_machine**_
+*   _**go_to_point**_   
+
+### User Interface (_user_interface.py_)
+This node prompt the user to enter an integer that represent either a start of the robot motion simulation of a stop of the simulation. Based on the input gotten from the user, the node sends a request of either **start** or **stop** to the state_machine node 
