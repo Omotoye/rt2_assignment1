@@ -41,7 +41,9 @@ The state machine is in charge of transitioning the system state from one state 
 ### Go To Point (_go_to_point.py_)
 This node takes a service request of a target pose coordinate message from the state machine and then navigates the robot from it's current position coordinate to the required target position coordinate. 
 
-This is the basic functions of the nodes contained in the **master** branch of this repository. The **action** and **ros2** branch makes minor changes to this nodes for some specific reason which would be described below.   
+This is the basic functions of the nodes contained in the **master** branch of this repository, for more information about the code contained in the nodes of the master branch [Click Here](https://omotoye.github.io/rt2_assignment1/ "Script code html Documentation") . The **action** and **ros2** branch makes minor changes to this nodes for some specific reason which would be described below. 
+
+---
 
 ## Action Package Description
 
@@ -63,4 +65,26 @@ def check_preempt():
     return False
 ```
 
+---
+
+Also the structure of the **Position.srv** message sent between the node was change to the format required by the action by the action server, **Position.action**. 
+```diff
+-   float32 x
+-   float32 y   #request
+-   float32 theta
+-   ---
+-   bool ok   #response
++   float32 x
++   float32 y     #goal
++   float32 theta
++   ---
++   bool ok  #result
++   ---
++   nav_msgs/Odometry pose #feedback
+```
+
+
 ## ROS2 Package Description
+
+This package does exactly thesame thing that the package in the master branch does, the only difference is that it does part of it with **ros2**,  [click here](https://github.com/Omotoye/rt2_assignment1/tree/ros2) to go to the ros2 branch. The package in both the **master** and **action** branch is written specifically for **_ROS Noetic Ninjemys_**. The package in the **ros2** branch allow some parts of the simulation (**state_machine and random_position is controlled from ros2**) to be control from a *__ROS 2 Foxy Fitzroy__* package. This is made possible by a package called [ros1_bridge](https://github.com/ros2/ros1_bridge "ros1_brige"), this package helps to bridge the messages from a **ros2** package with messages in **ros** package which then enable communication between the nodes of the package. _Instructions on how to compile and launch the ros1_brige can be found in the readme contained in the ros2 branch; **all required configurations has already been made to the package**_.
+
