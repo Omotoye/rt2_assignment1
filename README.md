@@ -91,7 +91,7 @@ This package does exactly thesame thing that the package in the master branch do
 
 ## The CoppeliaSim Simulation Scene
 <div align="center">
-<img src="images/pioneer_robot_model.png" width="50%" height="50%" title="Two Wheeled non-holonomic robot" alt="Two Wheeled non-holonomic robot" >
+<img src="images/pioneer_model.png" width="50%" height="50%" title="Two Wheeled non-holonomic robot" alt="Two Wheeled non-holonomic robot" >
 </div>
 
 A CoppeliaSim scene can also be found in this package (**exclusive to master/action branch**), this scene contains a Pioneer Mobile robot which can be controlled with thesame controller used for the **Gazebo Two Wheeled Robot**, the pioneer robot controller script has be written in such a way that is can be controlled with the nodes of this package, however the script does not allow a single **cmd_vel** velocity command for moving the robot about the simulation; for this reason an additional python script is added for publishing the required velocity command when using the CoppeliaSim scene for the simulation. The script is called **_pioneer_velocity_publisher.py_**. Information about the script given below.
