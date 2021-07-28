@@ -51,6 +51,9 @@ namespace rt2_assignment1
     {
     public:
         bool pose_ready = false;
+        bool start = false; ///< For setting the value of the request from the user interface
+        bool goal_reached = true;
+
         StateMachine(const rclcpp::NodeOptions &options) : Node("state_machine", options)
         {
             service_ = this->create_service<Command>(
@@ -81,11 +84,14 @@ namespace rt2_assignment1
                 2000ms, std::bind(&StateMachine::call_server1, this));
             timer2_ = this->create_wall_timer(
                 2000ms, std::bind(&StateMachine::call_server2, this));
+
+            this->request_1 = std::make_shared<RandomPosition::Request>();
+            this->response_1 = std::make_shared<RandomPosition::Response>();
+            this->request_2 = std::make_shared<Position::Request>();
+            this->response_2 = std::make_shared<Position::Response>();
         }
         void call_server1()
         {
-            this->request_1 = std::make_shared<RandomPosition::Request>();
-            this->response_1 = std::make_shared<RandomPosition::Response>();
 
             using ServiceResponseFuture =
                 rclcpp::Client<RandomPosition>::SharedFuture;
@@ -106,30 +112,30 @@ namespace rt2_assignment1
         }
         void call_server2()
         {
-            this->request_2 = std::make_shared<Position::Request>();
-            this->response_2 = std::make_shared<Position::Response>();
 
             using ServiceResponseFuture =
                 rclcpp::Client<Position>::SharedFuture;
             auto response_received_callback = [this](ServiceResponseFuture future)
             {
                 this->response_2 = future.get();
+                goal_reached = true;
             };
 
             this->request_2->x = this->response_1->x;
             this->request_2->y = this->response_1->y;
             this->request_2->theta = this->response_1->theta;
-            if (start == true && pose_ready == true)
+            //std::cout << "\nGoing to the position: x= " << this->response_1->x << " y= " << this->response_1->y << " theta = " << this->response_1->theta << std::endl;
+            
+            if (start == true && pose_ready == true && goal_reached == true)
             {
                 pose_ready = false;
+                goal_reached = false;
                 std::cout << "\nGoing to the position: x= " << this->request_2->x << " y= " << this->request_2->y << " theta = " << this->request_2->theta << std::endl;
                 auto future_result = client2_->async_send_request(this->request_2, response_received_callback);
             }
         }
 
     private:
-        bool start = false; ///< For setting the value of the request from the user interface
-
         /**
         * \brief callback function for handling the request sent from the user interface
         * \param req the request sent from the client
@@ -155,6 +161,7 @@ namespace rt2_assignment1
             {
                 start = false;
             }
+            res->ok = true;
             return true;
         }
 
@@ -171,7 +178,7 @@ namespace rt2_assignment1
         std::shared_ptr<Position::Response> response_2;
     };
 }
-// Registering the State Machine Node 
+// Registering the State Machine Node
 RCLCPP_COMPONENTS_REGISTER_NODE(rt2_assignment1::StateMachine)
 
 //int main(int argc, char *argv[])

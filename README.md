@@ -54,6 +54,13 @@ First you create a folder for your ros2 workspace
 ```bash
 mkdir -p ~/colcon_ws/src
 ```
+build the workspace
+
+```bash
+source /opt/ros/foxy/setup.bash
+cd ~/colcon_ws
+colcon build
+```
 
 Clone the package repository 
 
@@ -68,13 +75,7 @@ cd ~/colcon_ws/src/rt2_assignment1
 git checkout ros2
 ```
 
-Once the package has been successfully cloned, you then build the workspace
 
-```bash
-source /opt/ros/foxy/setup.bash
-cd ~/colcon_ws
-colcon build
-```
 After doing this, you create three scripts in your home directory
 
 ### script for sourcing ROS 
@@ -159,14 +160,12 @@ roslaunch rt2_assignment1 ros2_sim.launch
 Shell 2 
 ```bash 
 source ros12.sh 
-ros2 run ros1_bridge dynamic_bridge --bridge-all-topics
+ros2 run ros1_bridge dynamic_bridge
 ```
 Shell 3 
 ```bash
 source ros2.sh
 ros2 launch rt2_assignment1 sim_container.py
 ```
-_**You might see some error's because some of the messages published by the gazebo simulator would not be bridged properly, but this would not disturb the controller**_
-
 
 
