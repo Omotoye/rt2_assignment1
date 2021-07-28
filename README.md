@@ -120,7 +120,7 @@ def handle_wheel_velocity(msg):
 ```
 
 # New Package Version Release
-The next iteration of this project can be found in [Second Assignment of the Research Track 2 course](https://github.com/Omotoye/rt2_assignment1). This package is built from the **action** branch of this repository. it includes a **Jupyter Notebook** notebook that the user can use for the **control** *of the robot and the* **visualization** *of the state of the robot.* It features things like buttons for starting and stopping the robot, a control pad for directly moving the robot, and several plots for visualizing the state of the robot. The picture below is attached to give a preview of what to expect from the package. 
+The next iteration of this project can be found in [Second Assignment of the Research Track 2 course](https://github.com/Omotoye/rt2_assignment2). This package is built from the **action** branch of this repository. it includes a **Jupyter Notebook** notebook that the user can use for the **control** *of the robot and the* **visualization** *of the state of the robot.* It features things like buttons for starting and stopping the robot, a control pad for directly moving the robot, and several plots for visualizing the state of the robot. The picture below is attached to give a preview of what to expect from the package. 
 
 <div align="center">
 <img src="images/stop.PNG" title="Start/Stop Control" alt="Start/Stop Control" >
